@@ -34,5 +34,6 @@ require('./member.js');
 //게시글 ODM모델 추가 
 require('./admin.js');
 
+require('./channelMember.js');
 
 module.exports = connect;
