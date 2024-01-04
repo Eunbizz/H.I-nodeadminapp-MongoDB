@@ -11,7 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var adminRouter = require('./routes/admin')
-var articleRouter = require('./routes/article')
+var articleRouter = require('./routes/articles')
 var memberRouter = require('./routes/member')
 var channelRouter = require('./routes/channel')
 var messageRouter = require('./routes/message')
@@ -49,7 +49,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/admin', adminRouter);
-app.use('/article', articleRouter);
+app.use('/articles', articleRouter);
 app.use('/member', memberRouter);
 app.use('/channel', channelRouter);
 app.use('/message', messageRouter);
