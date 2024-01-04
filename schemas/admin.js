@@ -38,7 +38,7 @@ const adminSchema = new Schema({
     },
     reg_user_id: {
         type:Number,
-        required: false
+        required: true
     },
     edit_user_id: {
         type:Number,

@@ -6,30 +6,62 @@
 var express = require('express');
 var router = express.Router();
 
+const Channel = require('../schemas/channel');
 
 router.get('/list', async(req, res, next)=>{
 
   const channel_list = {
-    channel_id:1,
-    community_id:1,
-    category_code:1,
-    channel_name:'hi',
-    user_limit:100,
-    channel_img_path:'image/1',
-    reg_member_id:1,
-    reg_date:'2023.12.19'
+    community_id: "",
+    categoty_code:"",
+    channel_name:"",
+    user_limit:"",
+    channel_desc:"",
+    channel_state:"",
+    reg_date:"",
+    reg_member_id:""
   }
+
+  const channels = await Channel.find({});
   
-  res.render('channel/list.ejs',{channel_list});
+  res.render('channel/list.ejs',{channel_list, channels});
 });
 
-router.get('/create', async(req, res)=>{
 
+// 신규 채널 등록
+router.get('/create', async(req, res)=>{
   res.render('channel/create.ejs')
 })
 
-// 목록페이지 이동처리
+// 신규 채널 등록
 router.post('/create', async(req, res)=>{
+
+  var {categoty_code, channel_name,channel_desc,user_limit,channel_state,reg_member_id } = req.body;
+
+  var channel = {
+    community_id:1,
+    categoty_code: categoty_code,
+    channel_name: channel_name,
+    channel_desc: channel_desc,
+    channel_state: channel_state,
+    reg_date: Date.now(),
+    reg_member_id: 1,
+    user_limit: user_limit,
+  }
+
+  const channels = await Channel.create(channel)
+
+  res.redirect('/channel/list');
+})
+
+
+
+// 목록페이지 이동처리
+router.get('/delete', async(req, res)=>{
+
+  var channelId = req.query.id;
+
+  const result = await Channel.deleteOne({channel_id: channelId})
+
   res.redirect('/channel/list')
 })
 
@@ -37,31 +69,37 @@ router.get('/modify/:id', async(req, res)=>{
   
   var channelId = req.params.id;
 
-  const channel_list = {
-    channel_id:channelId,
-    community_id:1,
-    category_code:1,
-    channel_name:'hi',
-    user_limit:100,
-    channel_img_path:'image/1',
-    reg_member_id:1,
-    reg_date:'2023.12.19'
+  var channels = await Channel.find({channel_id: channelId})
+
+  var channel = null;
+  if (channels.length > 0 ){
+    channel = channels[0]
   }
 
-  res.render('channel/modify.ejs', {channel_list})
+  res.render('channel/modify.ejs', {channels, channel})
 })
 
 // 목록페이지 이동처리
 router.post('/modify/:id', async(req, res)=>{
   var channelId = req.params.id;
+
+  var {categoty_code, channel_name,channel_desc,user_limit,channel_state, reg_member_id } = req.body;
+
+  var channel = {
+    community_id:1,
+    categoty_code: categoty_code,
+    channel_name: channel_name,
+    channel_desc: channel_desc,
+    channel_state: channel_state,
+    reg_date: Date.now(),
+    reg_member_id: 1,
+    user_limit: user_limit
+  }
+
+  const result = await Channel.updateOne({channel_id: channelId}, channel);
+
   res.redirect('/channel/list')
 })
-
-// 목록페이지 이동처리
-router.get('/delete', async(req, res)=>{
-  res.redirect('/channel/list')
-})
-
 
 
 module.exports = router;

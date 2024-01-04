@@ -7,7 +7,7 @@ const connect = () => {
     }
 
     //몽고DB연결정보를 설정합니다.
-    mongoose.connect('mongodb://eunbi:rladmsql7134!@localhost:27017/admin', {
+    mongoose.connect('mongodb://robin:11qqaa..@localhost:27017/admin', {
         dbName: 'modu_chat',
     }, (error) => {
         if (error) {
@@ -28,11 +28,10 @@ mongoose.connection.on('disconnected', () => {
 });
 
 
-//회원정보 콜렉션 모델을 참조합니다.
-require('./member.js');
-
-//게시글 ODM모델 추가 
 require('./admin.js');
+require('./member.js');
+require('./channel.js');
+require('./channel_msg.js');
 
 
 module.exports = connect;
