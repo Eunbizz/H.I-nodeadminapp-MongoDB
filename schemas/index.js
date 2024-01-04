@@ -33,5 +33,6 @@ require('./member.js');
 require('./channel.js');
 require('./channel_msg.js');
 
+require('./channelMember.js');
 
 module.exports = connect;
