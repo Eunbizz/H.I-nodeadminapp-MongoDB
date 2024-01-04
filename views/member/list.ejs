@@ -73,17 +73,23 @@
                                             </tr>
                                         </thead>
                                         <tbody class="hoverTblBody">
-
-                                            <tr>
-                                                <td><a href="/member/modify/<%=member_list.member_id%>">1</a></td>
-                                                <td><a href="#">eb@gmail.com</a></td>
-                                                <td>김은비</td>
-                                                <td>01076407278</td>
-                                                <td>2000.10.20</td>
-                                                <td>이용중</td>
-                                                <td>2023-02-22</td>
-                                            </tr>
-
+                                            <% for(var i=0; i <members.length;i++){ %>
+                                                <tr>
+                                                    <td><a href="/member/modify/<%=members[i].member_id%>"><%=members[i].member_id%></a></td>
+                                                    <td><%=members[i].email%></td>
+                                                    <td><%=members[i].name%></td>
+                                                    <td><%=members[i].telephone%></td>
+                                                    <td><%=members[i].birth_date%></td>
+                                                    <td>
+                                                        <% if(members[i].use_state_code==1){%>
+                                                        사용중
+                                                        <%} else { %>
+                                                        탈퇴상태
+                                                        <%}%>
+                                                    </td>
+                                                    <td><%=moment(members[i].reg_date).format('YYYY-MM-DD HH:mm')%></td>
+                                                </tr>
+                                            <%}%>
                                         </tbody>
                                     </table>
 

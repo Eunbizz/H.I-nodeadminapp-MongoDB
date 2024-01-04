@@ -66,7 +66,6 @@ router.post('/create', async(req, res)=>{
   var birthDate = req.body.birthDate;
   var entryTypeCode = req.body.entryTypeCode;
   var useStateCode = req.body.useStateCode;
-  var regDate = req.body.regDate
 
 
   // step2: 추출된 사용자 입력 데이터를 단일 게시글 json 데이터로 구성해서
@@ -82,7 +81,7 @@ router.post('/create', async(req, res)=>{
       birth_date:birthDate,
       entry_type_code:entryTypeCode,
       use_state_code:useStateCode,
-      reg_date:regDate
+      reg_date:Date.now()
   };
 
   await Member.create(member);
@@ -112,7 +111,6 @@ router.post('/modify/:id', async(req, res)=>{
   var birthDate = req.body.birthDate;
   var entryTypeCode = req.body.entryTypeCode;
   var useStateCode = req.body.useStateCode;
-  var regDate = req.body.regDate
 
 
   // step2: 추출된 사용자 입력 데이터를 단일 게시글 json 데이터로 구성해서
@@ -128,7 +126,7 @@ router.post('/modify/:id', async(req, res)=>{
     birth_date:birthDate,
     entry_type_code:entryTypeCode,
     use_state_code:useStateCode,
-    reg_date:regDate
+    reg_date:Date.now()
   };
 
   await Member.updateOne({member_id:memberId},member);
@@ -142,7 +140,7 @@ router.get('/delete', async(req, res)=>{
   var memberId = req.query.aidx;
 
   await Member.deleteOne({member_id:memberId});
-  
+
   res.redirect('/member/list')
 })
 
