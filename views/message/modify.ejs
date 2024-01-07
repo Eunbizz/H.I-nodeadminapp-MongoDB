@@ -1,125 +1,103 @@
 
-            <!--우측 콘텐츠 헤더영역 -->
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>메시지 정보 관리</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="/">Home ></a>
-                        </li>
-                        <li>
-                            <a>메시지 정보 관리 ></a>
-                        </li>
-                        <li class="active">
-                            <strong>확인/수정</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
+    <!--우측 콘텐츠 헤더영역 -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>신규 메시지 등록</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/Home/Index">Home</a> > 
+                </li>
+                <li>
+                    <a> 신규 메시지</a> > 
+                </li>
+                <li class="active">
+                    <strong> 수정</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
 
-                </div>
-            </div>
-
-            <!--우측 콘텐츠 영역 -->
-            <form action="/message/modify/<%=message_list.message_id%>" method="post">
-                <div class="wrapper wrapper-content">
-                    <div class="ibox-content m-b-sm border-bottom">
-
-
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">메일주소</label>
-                                    <input type="text" name="email" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">비밀번호</label>
-                                    <input type="password" name="password" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">이름</label>
-                                    <input type="text" name="name" class="form-control">
-                                </div>
-                            </div>
-
+    <!--우측 콘텐츠 영역 -->
+    <div class="wrapper wrapper-content">
+        <form action="/message/modify/<%=message.channel_msg_id%>" id="messageForm" method="post">
+            <div class="ibox-content m-b-sm border-bottom">
+                <!-- <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group d-flex flex-column">
+                            <label class="control-label">대표이미지</label>
+                            <img class="w-75" src="" alt="" />
+                            <button class="w-75" submit="/">변경</button>
                         </div>
-
-
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">사진 업로드</label>
-                                    <input type="file" name="file" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">전화번호</label>
-                                    <input type="text" name="telephone" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">생년월일</label>
-                                    <input type="text" name="birthday" class="form-control">
-                                </div>
-                            </div>
-
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">채팅방ID</label>
+                            <input type="text" id="channelId" name="channelId" class="form-control" value="<%=message.channel_id%>">
                         </div>
-
-
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">회원가입유형</label>
-                                    <select name="entryTypeCode" class="form-control">
-                                        <option value="0">직접가입</option>
-                                        <option value="1">SNS-Facebook</option>
-                                        <option value="2">SNS-Google</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">가입상태정보</label>
-                                    <select name="entryStateCode" class="form-control">
-                                        <option value="0">일시중지</option>
-                                        <option value="1">사용중</option>
-                                        <option value="2">탈퇴상태</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">가입일시</label>
-                                    <input type="text" class="form-control" value="2022-12-19" readonly>
-                                </div>
-                            </div>
-
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">작성자ID</label>
+                            <input type="text" id="memberId" name="memberId" class="form-control" value="<%=message.member_id%>">
                         </div>
-                        
-
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">저장</button>
-                            <a href="/message/list" class="btn btn-info">목록</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">닉네임</label>
+                            <input type="text" id="nickName" name="nickName" class="form-control" value="<%=message.nick_name%>">
                         </div>
-
                     </div>
                 </div>
-            </form>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">메시지</label>
+                            <textarea id="message" name="message" rows="4" cols="50" class="form-control"><%=message.message%></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">메세지 유형</label>
+                            <select id="msgTypeCode" name="msgTypeCode" class="form-control">
+                                <option value="0"<% if( message.msg_type_code == "0"){ %> selected <% } %>>퇴장</option>
+                                <option value="1"<% if( message.msg_type_code == "1"){ %> selected <% } %>>입장</option>
+                                <option value="3"<% if( message.msg_type_code == "3"){ %> selected <% } %>>일반메세지</option>
+                                <option value="4"<% if( message.msg_type_code == "4"){ %> selected <% } %>>파일메세지</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">커넥션ID</label>
+                            <input type="text"  class="form-control" id="connectionId" name="connectionId" value="<%=message.connection_id%>">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">수정일시</label>
+                            <input type="date"  class="form-control" id="editDate" name="editDate" value="<%=moment(message.edit_date).format('YYYY-MM-DD HH:mm')%>">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">저장</button>
+                    <a href="/message/list" class="btn btn-info">목록</a>
+                    <a href="#"><button type="button" id="btnDel" class="btn btn-danger">삭제</button></a>
+                    <input type="hidden" id="messageId" value="<%=message.channel_msg_id%>">
+                </div>
+            </div>
+        </form>
+    </div>
 
- 
+
+
     <script>
 
     </script>
 
-</body>
-
-</html>

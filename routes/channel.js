@@ -6,6 +6,8 @@
 var express = require('express');
 var router = express.Router();
 
+const moment = require('moment');
+
 const Channel = require('../schemas/channel');
 
 router.get('/list', async(req, res, next)=>{
@@ -23,8 +25,22 @@ router.get('/list', async(req, res, next)=>{
 
   const channels = await Channel.find({});
   
-  res.render('channel/list.ejs',{channel_list, channels});
+  res.render('channel/list.ejs',{channel_list, channels, moment});
 });
+
+router.post('/list', async(req, res, next)=> {
+
+  var channel = {
+    channel_state: req.body.channelState,
+    channel_name: req.body.channelName,
+    categoty_code: req.body.categotyCode
+  };
+
+  const channels = await Channel.find(channel);
+
+  res.render('channel/list', {channels})
+
+})
 
 
 // 신규 채널 등록
@@ -35,17 +51,19 @@ router.get('/create', async(req, res)=>{
 // 신규 채널 등록
 router.post('/create', async(req, res)=>{
 
-  var {categoty_code, channel_name,channel_desc,user_limit,channel_state,reg_member_id } = req.body;
+  var regMemberId = req.body.regMemberId;
 
   var channel = {
     community_id:1,
-    categoty_code: categoty_code,
-    channel_name: channel_name,
-    channel_desc: channel_desc,
-    channel_state: channel_state,
+    categoty_code: req.body.categotyCode,
+    channel_name: req.body.channelName,
+    channel_desc: req.body.channelDesc,
+    channel_state: req.body.channelState,
     reg_date: Date.now(),
     reg_member_id: 1,
-    user_limit: user_limit,
+    user_limit: req.body.userLimit,
+    edit_date: Date.now(),
+    edit_member_id: 1,
   }
 
   const channels = await Channel.create(channel)
@@ -54,8 +72,7 @@ router.post('/create', async(req, res)=>{
 })
 
 
-
-// 목록페이지 이동처리
+// 채널삭제
 router.get('/delete', async(req, res)=>{
 
   var channelId = req.query.id;
@@ -65,6 +82,7 @@ router.get('/delete', async(req, res)=>{
   res.redirect('/channel/list')
 })
 
+// 채널수정페이지
 router.get('/modify/:id', async(req, res)=>{
   
   var channelId = req.params.id;
@@ -76,26 +94,24 @@ router.get('/modify/:id', async(req, res)=>{
     channel = channels[0]
   }
 
-  res.render('channel/modify.ejs', {channels, channel})
+  res.render('channel/modify.ejs', {channels, channel, moment})
 })
 
-// 목록페이지 이동처리
+// 채널수정페이지 정보수정
 router.post('/modify/:id', async(req, res)=>{
-  var channelId = req.params.id;
 
-  var {categoty_code, channel_name,channel_desc,user_limit,channel_state, reg_member_id } = req.body;
+  var channelId = req.params.id;
 
   var channel = {
     community_id:1,
-    categoty_code: categoty_code,
-    channel_name: channel_name,
-    channel_desc: channel_desc,
-    channel_state: channel_state,
-    reg_date: Date.now(),
-    reg_member_id: 1,
-    user_limit: user_limit
+    categoty_code: req.body.categotyCode,
+    channel_name: req.body.channelName,
+    channel_desc: req.body.channelDesc,
+    channel_state: req.body.channelState,
+    user_limit: req.body.userLimit,
+    edit_date: Date.now(),
+    edit_member_id: 1,
   }
-
   const result = await Channel.updateOne({channel_id: channelId}, channel);
 
   res.redirect('/channel/list')

@@ -1,105 +1,101 @@
 
-            <!--우측 콘텐츠 헤더영역 -->
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>신규 메시지 등록</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="/Home/Index">Home</a> > 
-                        </li>
-                        <li>
-                            <a> 신규 메시지</a> > 
-                        </li>
-                        <li class="active">
-                            <strong> 등록</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
+    <!--우측 콘텐츠 헤더영역 -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>신규 메시지 등록</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/Home/Index">Home</a> > 
+                </li>
+                <li>
+                    <a> 신규 메시지</a> > 
+                </li>
+                <li class="active">
+                    <strong> 등록</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
 
-                </div>
-            </div>
-
-            <!--우측 콘텐츠 영역 -->
-            <form action="/message/create" id='articleForm' method="post">
-                <div class="wrapper wrapper-content">
-                    <div class="ibox-content m-b-sm border-bottom">
-
-                        <!-- 게시판 영역 -->
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">채널</label>
-                                    <select name="channelId" id="channelId" class="form-control">
-                                        <option value="0">선택</option>
-                                        <option value="1">공지채널</option>
-                                        <option value="2">잡담채널</option>
-                                    </select>
-                                </div>
-                            </div>
+    <!--우측 콘텐츠 영역 -->
+    <div class="wrapper wrapper-content">
+        <form action="/message/create" id="messageForm" method="post">
+            <div class="ibox-content m-b-sm border-bottom">
+                <!-- <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group d-flex flex-column">
+                            <label class="control-label">대표이미지</label>
+                            <img class="w-75" src="" alt="" />
+                            <button class="w-75" submit="/">변경</button>
                         </div>
-                        <!-- 글 제목 영역 -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label">채널이름</label>
-                                    <input type="text" name="title" id="title" class="form-control">
-                                </div>
-                            </div>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">채팅방ID</label>
+                            <input type="text" id="channelId" name="channelId" class="form-control">
                         </div>
-
-                        <!-- 글 내용 입력 영역 -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label">채널설명</label>
-                                    <textarea class="form-control" name='contents' id='contents' rows="10" cols="5"></textarea>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">작성자ID</label>
+                            <input type="text" id="memberId" name="memberId" class="form-control">
                         </div>
-
-                        <!-- 게시글 유형, 게시 여부, 등록자 입력 영역 -->
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label">동시채널접속자수</label>
-                                    <input type="text" name="userLimit" id="userLimit" class="form-control">
-
-                                    </select>
-                                </div>
-                            </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="control-label">게시여부</label>
-                                        <select name="isDisplayCode" id="isDisplayCode" class="form-control">
-                                            <option value="9">선택</option>
-                                            <option value="1">게시함</option>
-                                            <option value="0">게시안함</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="control-label">등록아이디</label>
-                                        <input type="text" name="register" id="register" class="form-control">
-                                    </div>
-                                </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">닉네임</label>
+                            <input type="text" id="nickName" name="nickName" class="form-control">
                         </div>
-
-                        <!-- 저장/목록 이동 버튼 -->
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">저장</button>
-                            <a href="/message/list" class="btn btn-info">목록</a>
-                        </div>
-
                     </div>
                 </div>
-            </form>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">메시지</label>
+                            <textarea id="message" name="message" rows="4" cols="50" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">메세지 유형</label>
+                            <select id="msgTypeCode" name="msgTypeCode" class="form-control">
+                                <option value="0">퇴장</option>
+                                <option value="1" selected>입장</option>
+                                <option value="3">일반메세지</option>
+                                <option value="4">파일메세지</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">커넥션ID</label>
+                            <input type="text"  class="form-control" id="connectionId" name="connectionId">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">등록일시</label>
+                            <input type="date"  class="form-control" id="msgDate" name="msgDate" value="2024-01-08">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">저장</button>
+                    <a href="/message/list" class="btn btn-info">목록</a>
+                </div>
+            </div>
+        </form>
+    </div>
 
 
 
     <script>
-
 
     </script>
 
