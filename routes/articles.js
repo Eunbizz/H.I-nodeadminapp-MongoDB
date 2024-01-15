@@ -30,7 +30,6 @@ router.post('/list', async(req, res)=>{
     const { board_type_code, title, is_display_code } = req.body;
     let whereClause = {};
     if (board_type_code !== '0') {whereClause.board_type_code = board_type_code;}
-    // 대소문자 구분 없이 검색하기 위해 정규식 사용
     if (title !== '') {whereClause.title = {$regex: title, $options: 'i'};}
     if (is_display_code !== '9') {whereClause.is_display_code = is_display_code;}
     try {
@@ -69,10 +68,13 @@ router.post('/create',async(req,res)=>{
         reg_date,
         reg_member_id
     }
-
-    await Article.create(article);
-
-    res.redirect("/articles/list");
+    try{
+        await Article.create(article);
+        res.redirect("/articles/list");
+    }catch(err){
+        console.error("Error updating the file:", err);
+        res.status(500).send("Error updating the user data.");
+    }
 });
 
 router.get('/modify/:aid',async(req,res)=>{

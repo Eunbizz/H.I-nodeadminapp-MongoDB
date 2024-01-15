@@ -42,6 +42,6 @@ const channelMemberSchema = new Schema({
     }
 })
 
-channelMemberSchema.plugin(AutoIncrement,{inc_field:"channel_id"});
+channelMemberSchema.plugin(AutoIncrement,{inc_field:"channel_member_id"});
 
 module.exports = mongoose.model('ChannelMember', channelMemberSchema);
