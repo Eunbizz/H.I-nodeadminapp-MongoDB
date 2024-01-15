@@ -31,7 +31,7 @@ mongoose.connection.on('disconnected', () => {
 require('./admin.js');
 require('./member.js');
 require('./channel.js');
-require('./channel_msg.js');
+require('./channelMessage.js');
 
 require('./channelMember.js');
 

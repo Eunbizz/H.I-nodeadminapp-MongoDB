@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const{Schema} = mongoose;
 
-const channelMsgSchema = new Schema({
+const channelMessageSchema = new Schema({
     channel_id: {
         type:Number,
         required: true
@@ -26,7 +26,7 @@ const channelMsgSchema = new Schema({
     },
     message: {
         type:String,
-        required:true
+        required:false
     },
     ip_address: {
         type:String,
@@ -48,12 +48,12 @@ const channelMsgSchema = new Schema({
         type:Date,
         default:Date.now
     },
-    reg_date: {
+    del_date: {
         type:Date,
         default:Date.now
     }
 })
 
-channelMsgSchema.plugin(AutoIncrement,{inc_field:"channel_msg_id"});
+channelMessageSchema.plugin(AutoIncrement,{inc_field:"channel_msg_id"});
 
-module.exports = mongoose.model('ChannelMsg', channelMsgSchema);
+module.exports = mongoose.model('ChannelMessageS', channelMessageSchema);

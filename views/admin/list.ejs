@@ -30,14 +30,14 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="control-label" for="OrderNo">부서명</label>
-                                    <input type="text" name="deptName" class="form-control">
+                                    <input type="text" name="dept_name" class="form-control">
                                     
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="control-label" for="OrderName">이름</label>
-                                    <input type="text" name="name" class="form-control">
+                                    <input type="text" name="admin_name" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -74,8 +74,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="hoverTblBody">
-                                            <% for(var i =0;i<admins.length;i++){ %>
-
+                                            <% for(var i =0;i < admins.length;i++){ %>
                                             <td><a href="/admin/modify/<%=admins[i].admin_member_id%>"><%=admins[i].admin_member_id%></a></td>
                                             <td><%=admins[i].dept_name%></td>
                                             <td><%=admins[i].admin_name%></td>
